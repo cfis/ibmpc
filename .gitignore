@@ -1,0 +1,33 @@
+# Bundler
+.bundle
+Gemfile.lock
+
+# Extension build files
+/ext/build
+
+# Compiled extension in lib (should be built fresh)
+lib/**/*.so
+lib/**/*.dll
+lib/**/*.pdb
+lib/**/*.bundle
+
+# IDE files
+.idea
+.vs
+*.vcxproj.user
+
+# AI
+.claude
+
+# Packaging
+/pkg/
+
+# Temp files
+*.swp
+.*.swp
+tmp/
+heap.dump
+
+# Ruby version managers
+.ruby-version
+.rvmrc

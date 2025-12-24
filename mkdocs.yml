@@ -1,0 +1,41 @@
+site_name: IBM PC File Recovery Project
+site_description: A journey to transfer files from a 1981 IBM PC to a modern laptop via serial connection
+site_author: cfis
+
+theme:
+  name: material
+  palette:
+    scheme: slate
+    primary: blue grey
+    accent: amber
+  features:
+    - navigation.sections
+    - navigation.expand
+    - toc.integrate
+
+nav:
+  - Home: index.md
+  - Part 1 - Install Serial Card: part1-install-serial-card.md
+  - Part 2 - Serial Connection: part2-serial-connection.md
+  - Part 3 - Bootstrap Text Receiver: part3-text-receiver.md
+  - Part 4 - Kermit: part4-kermit.md
+  - Part 5 - Bootstrap Binary Receiver: part5-binary-receiver.md
+  - Part 6 - Can't Send Files!: part6-mskermit.md
+  - Part 7 - Debugging the Transmit Path: part7-debugging.md
+  - Part 8 - Next Steps: part8-next-steps.md
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - admonition
+  - pymdownx.details
+  - tables
+  - toc:
+      permalink: true
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/cfis/ibmpc

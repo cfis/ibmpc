@@ -42,9 +42,9 @@ Thus you can buy a 386 or 486 era machine that has both a 5.25 and 3.5 drive. Yo
 
 Use the parallel port on the IBM PC to transfer data to my laptop. However, laptops and desktops stopped including the parallel port around 2005. You can buy USB-to-parallel cables, but they are designed for printers and do not support bidirectional file transfer.
 
-To remedy this, Petr Stehlík has an amazing project, [PARCP-USB](https://joy.sophics.cz/parcp/parcp-usb.html). He builds a special adapter that enables bidirectional data transfer using the parallel port with a program called PARCP.
+To remedy this, Petr Stehlík has an amazing project, [PARCP-USB](https://joy.sophics.cz/parcp/parcp-usb.html). He builds a special adapter that enables bidirectional data transfer using the parallel port using an open source program called [PARCP](https://github.com/joysfera/parcp). 
 
-I reached out to him and he was very helpful. Unfortunately, he let me know that PARCP-USB requires a 32 bit CPU, and thus a 386 generation or later machine. So this option will not work.
+I reached out to him and he was very helpful. He let me know the hardware is compatible with the IBM PC. However, PARCP is not because it is compiled for DOS with [DJGPP](https://www.delorie.com/djgpp/) which requires a 32-bit CPU (so [386](https://en.wikipedia.org/wiki/I386) or higher). Petr mentioned it would be possible to port it to 8086 DOS with some effort.
 
 ### Option 3: Serial Port Transfer (works)
 

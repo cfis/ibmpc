@@ -25,6 +25,7 @@ nav:
   - Part 6 - Can't Send Files!: part6-mskermit.md
   - Part 7 - Debugging: part7-debugging.md
   - Part 8 - Next Steps: part8-next-steps.md
+  - Resources: resources.md
 
 markdown_extensions:
   - pymdownx.highlight:

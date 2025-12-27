@@ -26,6 +26,7 @@ Useful references for IBM PC serial communication and file transfer.
 ## IBM PC Hardware
 
 - [IBM PC 5150 Wikipedia](https://en.wikipedia.org/wiki/IBM_Personal_Computer) - Hardware overview
+- [IBM 51xx PC Family Computers](https://minuszerodegrees.net/) - Great documentation site
 - [8250 UART](https://en.wikipedia.org/wiki/8250_UART) - Serial chip documentation
 - [MC1488 Datasheet](https://www.onsemi.com/pdf/datasheet/mc1488-d.pdf) - RS-232 line driver (requires ±12V)
 - [ISA Bus](https://en.wikipedia.org/wiki/Industry_Standard_Architecture) - Bus architecture

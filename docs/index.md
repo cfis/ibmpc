@@ -1,4 +1,4 @@
-# IBM PC File Recovery Project
+﻿# IBM PC File Recovery Project
 
 ## Overview
 
@@ -20,7 +20,7 @@ It was also my mom's working computer through the 1980's. She was a journalist a
 
 After all these years, she still had the machine - boxed away in the garage. So I recently pulled it out, set it up, and amazingly it booted right up. I forgot how noisy it was! And so primitive - no command history, no command completion, no copy/paste, etc. But at least it had a 10MB hard drive - added a few years later - which makes it a lot easier to use that with a single 5.25 inch floppy drive.
 
-It took me a few minutes to remember how to navigate the machine and refamiliarize myself with the programs of the time (Norton Commander, Fastwire II, etc). After a bit of poking around I found one of the books on the harddrive and couple more on 5 1/4 floppy drives. The books were written using a word processor called [Leading Edge](https://en.wikipedia.org/wiki/Leading_Edge_Products), which was pretty great for the time but eventually got annihilated by [WordStar](https://en.wikipedia.org/wiki/WordStar) and then [WordPerfect](https://en.wikipedia.org/wiki/WordPerfect).
+It took me a few minutes to remember how to navigate the machine and refamiliarize myself with the programs of the time (Norton Commander, Fastwire II, etc). After a bit of poking around I found one of the books on the hard drive and a couple more on 5 1/4 floppy drives. The books were written using a word processor called [Leading Edge](https://en.wikipedia.org/wiki/Leading_Edge_Products), which was pretty great for the time but eventually got annihilated by [WordStar](https://en.wikipedia.org/wiki/WordStar) and then [WordPerfect](https://en.wikipedia.org/wiki/WordPerfect).
 
 Now that I found what I was looking for, how should I copy the files from the IBM PC to my laptop.  My laptop is a Thinkpad that dual boots Windows 11 and Fedora 43. Either operating system will work.
 
@@ -34,28 +34,28 @@ Modern computers have almost no overlap with the 1981 IBM PC. The PC predates:
 
 ### Option 1: Floppy Disk Sneakernet
 
-One obvious solution is copy the files to 5.25 floppy drives and then buy a USB 5.25 inch drive. The problem is USB 5.25 floppy drives don't actually exist. However, you can buy a USB 3.5 inch drive.
+One obvious solution is to copy the files to 5.25 floppy drives and then buy a USB 5.25 inch drive. The problem is USB 5.25 floppy drives don't actually exist. However, you can buy a USB 3.5 inch drive.
 
 Thus you can buy a 386 or 486 era machine that has both a 5.25 and 3.5 drive. You can then copy the files from a 5.25 floppy drive to a 3.5 floppy drive and then to the laptop. This solution of course requires acquiring another old machine - which I wasn't very enthusiastic about.
 
 ### Option 2: Parallel Port Transfer
 
-Use the parallel port on the IBM PC to transfer data to my laptop. However, laptops and desktops stopped including parallel port around 2005. You can buy USB-to-parallel cables, but they are designed for printers and do not support bidirectional file transfer.
+Use the parallel port on the IBM PC to transfer data to my laptop. However, laptops and desktops stopped including the parallel port around 2005. You can buy USB-to-parallel cables, but they are designed for printers and do not support bidirectional file transfer.
 
-To remedy this, Petr Stehlík has an amazing project, [PARCP-USB](https://joy.sophics.cz/parcp/parcp-usb.html). He builds a special adapter that enables bidirectional data transfer using the parallel port with a program called PARCP.
+To remedy this, Petr StehlÃ­k has an amazing project, [PARCP-USB](https://joy.sophics.cz/parcp/parcp-usb.html). He builds a special adapter that enables bidirectional data transfer using the parallel port with a program called PARCP.
 
 I reached out to him and he was very helpful. Unfortunately, he let me know that PARCP-USB requires a 32 bit CPU, and thus a 386 generation or later machine. So this option will not work.
 
 ### Option 3: Serial Port Transfer (works)
 
-The IBM supports a RS-232 serial port - a standard that is still with us today! This approach has many advantages, including:
+The IBM supports an RS-232 serial port - a standard that is still with us today! This approach has many advantages, including:
 
 - RS-232 is electrically simple and well-documented
 - No CPU requirements  -  works on any PC with a serial port
 - Lots of software options, including terminal programs, Kermit, XMODEM, or raw BASIC
 - USB-to-serial adapters are cheap and common
 
-One downside is serial communications is slow. On old hardware it runs at 1200-9600 bauds. At 4800 baud, a 185 KB file would take a bit over 5 minutes to transfer. But for copying old documents that is fast enough.
+One downside is serial communications are slow. On old hardware it runs at 1200-9600 baud. At 4800 baud, a 185 KB file would take a bit over 5 minutes to transfer. But for copying old documents that is fast enough.
 
 To get this working requires:
 
@@ -64,7 +64,7 @@ To get this working requires:
 - A USB-to-serial adapter
 - A bootstrap program to copy a file transfer program from my laptop to the PC
 
-Peter also cautioned that I might run into issues with voltage levels. RS232 uses +/-12 V for signals, while current USB to UART/serial converters often only use just 5V/0V. Thus the IBM PC might not work with the low voltage levels. 
+Petr also cautioned that I might run into issues with voltage levels. RS-232 uses +/-12 V for signals, while current USB to UART/serial converters often only use 5V/0V. Thus the IBM PC might not work with the low voltage levels. 
 
 However, this is the path I chose.
 
@@ -86,7 +86,7 @@ So my plan was:
 | 4 | [Kermit](part4-kermit.md) | Trying to use KERMIT.BAS for file transfer protocol |
 | 5 | [Bootstrap Binary Receiver](part5-binary-receiver.md) | Creating a custom binary transfer system |
 | 6 | [Can't Send Files!](part6-mskermit.md) | Discovering the one-way communication issue |
-| 7 | [Debugging the Transmit Path](part7-debugging.md) | Diagnosing the line driver failure with loopback tests |
+| 7 | [Debugging](part7-debugging.md) | Diagnosing the line driver failure with loopback tests |
 | 8 | [Next Steps](part8-next-steps.md) | Checking the -12V rail and fixing the PSU |
 
 ## Current Status
@@ -96,4 +96,5 @@ So my plan was:
 **Blocked:** PC -> laptop transfer fails due to line driver or PSU issue
 
 **Next Steps:** Check the -12V rail and replace serial card or PSU if needed
+
 

@@ -1,6 +1,8 @@
 site_name: IBM PC File Recovery Project
 site_description: A journey to transfer files from a 1981 IBM PC to a modern laptop via serial connection
 site_author: cfis
+repo_url: https://github.com/cfis/ibmpc
+repo_name: cfis/ibmpc
 
 theme:
   name: material
@@ -21,7 +23,7 @@ nav:
   - Part 4 - Kermit: part4-kermit.md
   - Part 5 - Bootstrap Binary Receiver: part5-binary-receiver.md
   - Part 6 - Can't Send Files!: part6-mskermit.md
-  - Part 7 - Debugging the Transmit Path: part7-debugging.md
+  - Part 7 - Debugging: part7-debugging.md
   - Part 8 - Next Steps: part8-next-steps.md
 
 markdown_extensions:

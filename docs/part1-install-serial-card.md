@@ -4,7 +4,7 @@ The IBM PC 5150 didn't come with a serial port - it was an optional add-on. To t
 
 ## IBM 1501485-XM
 
-I first tried a IBM 1501485-XM, which I purchased from [eBay](https://www.ebay.com/itm/157150188353).
+I first tried an IBM 1501485-XM, which I purchased from [eBay](https://www.ebay.com/itm/157150188353).
 
 ## BIOS COM Port Check (DEBUG)
 
@@ -41,8 +41,9 @@ MODE COM1
 
 This returned *Invalid parameter*. Then in GW-BASIC, I tried:
 
-```bas
-OPEN "COM1:"` and `OPEN "COM1:9600,N,8,1
+```basic
+OPEN "COM1:"
+OPEN "COM1:9600,N,8,1"
 ```
 
 Unfortunately, the command repeatedly failed with the error message `Device Unavailable` / `Error 24` which is a device timeout. It seemed that the call to the UART timed out even though the BDA reported COM1.
@@ -57,4 +58,8 @@ The card also passed the BIOS check, which reported COM1 at 0x03F8.
 
 Even better, this time GW-BASIC could open `COM1:9600,N,8,1` without device errors.
 
-With a working serial card installed, the next step was connecting the IBM PC to a laptop. See [Part 2: Serial Connection](part2-serial-connection.md).
+With a working serial card installed, the next step was connecting the IBM PC to a laptop.
+
+---
+
+**Next:** [Part 2: Serial Connection](part2-serial-connection.md)

@@ -1,4 +1,4 @@
-    # Part 5: Binary Bootstrap Receiver
+# Part 5: Binary Bootstrap Receiver
 
 Since text transfer did not work, the next choice was to rewrite my `receive.bas` program to support binary transfer. Which of course looking back, I should have just started with a binary transfer program.
 
@@ -19,9 +19,9 @@ ERR=2 ERL=70
 
 It turns out the version of GW-BASIC installed on the IBM PC is too old to support `FOR BINARY`.
 
-### Random Access Mode
+## Random Access Mode
 
-Since `FOR BINARY` didn't work, my next approach was to use random access files with `FIELD`, `LSET`, and `PUT`. Here is the final working program:
+Since `FOR BINARY` didn't work, my next approach was to use random access files with `FIELD`, `LSET`, and `PUT`. Here is the final working program ([source](https://github.com/cfis/ibmpc/blob/master/src/binary-receive.bas)):
 
 ```basic
 10 ON ERROR GOTO 900
@@ -97,7 +97,7 @@ If you forget to increment `RECORD`, every write overwrites the same location. T
 
 ### send_binary.rb (Laptop)
 
-The sender is a Ruby script that reads a binary file, pads it to a multiple of COUNT bytes, and sends it over the serial port. It displays progress every 5% so you know the transfer is working.
+The sender is a Ruby script ([source](https://github.com/cfis/ibmpc/blob/master/src/send_binary.rb)) that reads a binary file, pads it to a multiple of COUNT bytes, and sends it over the serial port. It displays progress every 5% so you know the transfer is working.
 
 Usage:
 

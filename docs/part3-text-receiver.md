@@ -17,7 +17,7 @@ However, the IBM PC did have [GW-BASIC](https://en.wikipedia.org/wiki/GW-BASIC) 
 My goal was to copy [kermit.bas](https://www.columbia.edu/kermit/ftp/old/basic/kermit.bas) from my laptop to the IBM, and then use the Kermit program to transfer files.
 
 !!! warning "Skip kermit.bas"
-    Looking back this was the wrong choice. I should have started with transferring a binary file, `mskermit.exe`. That's the subject of the next [section](part6-mskermit.md).
+    Looking back this was the wrong choice. I should have started with transferring a binary file, `mskermit.exe`. See [Part 6](part6-mskermit.md) for why.
 
 I didn't remember much about basic, except that it had lots of line numbers. To start, you type the command gwbasic which opens this interface:
 
@@ -26,7 +26,7 @@ I didn't remember much about basic, except that it had lots of line numbers. To 
 !!! note "Exit GW-BASIC"
     To exit GW-BASIC type in `SYSTEM`.
 
-Then start typing in your program (see [receive.bas](/src/receive.bas)):
+Then start typing in your program (see [receive.bas](https://github.com/cfis/ibmpc/blob/master/src/receive.bas)):
 
 ```basic
 10 ON ERROR GOTO 900

@@ -1,4 +1,4 @@
-# Part 7: Debugging the Transmit Path
+# Part 7: Debugging
 
 Although I could send files from my laptop to the IBM, I could not send files from the IBM to my laptop, which was the whole point of this exercise.
 
@@ -70,7 +70,7 @@ I then went through a number of possible other problems, eliminating them one-by
 
 ## Raw Serial Test
 
-Next I wrote a simple `send.bas` file on the IBM to transmit data:
+Next I wrote a simple `send.bas` file ([source](https://github.com/cfis/ibmpc/blob/master/src/send.bas)) on the IBM to transmit data:
 
 ```basic
 10 ON ERROR GOTO 900
@@ -100,7 +100,7 @@ Next I wrote a simple `send.bas` file on the IBM to transmit data:
 | 90 | `PRINT "Got back: ";A$` | Display received data |
 | 900 | Error handler |
 
-On the laptop, I then ran a Ruby script to listen for incoming data:
+On the laptop, I then ran a Ruby script ([source](https://github.com/cfis/ibmpc/blob/master/src/receive.rb)) to listen for incoming data:
 
 ```ruby
 require 'serialport'
@@ -126,12 +126,12 @@ As expected, the Ruby script blocked indefinitely waiting for data that never ar
 
 ## The USB Serial Adapter
 
-Next, I unplugged the null modem cable from the USB serial adapter. I created a "loopback" by shorting pins 2 and 3 on the female DB-9 mating plate. This would allow the IBM PC to talk to itself and check if the USB adapter was not working properly.
+Next, I unplugged the null modem cable from the USB serial adapter. I created a "loopback" by shorting pins 2 and 3 on the female DB-9 mating plate. This would verify the USB adapter was working properly by having it echo back anything sent to it.
 
 !!! warning "Pin Placement"
     On a female mating plate, pin #1 is on the top right! For more information refer to the [RS-232](part2-serial-connection.md#rs-232-) section.
 
-Running the `send.bas` on the IBM PC still showed the same result - the IBM PC was not transmitting any data. So the USB serial adapter was not at fault.
+I typed some characters on the laptop and they echoed back correctly. So the USB serial adapter was working fine - the problem was on the IBM PC side.
 
 ## The Null Modem Cable
 
@@ -141,7 +141,7 @@ I then ran the `send.bas` again. And again no data. This left the serial card as
 
 ## Serial Card Testing
 
-In the [serial card](part2-serial-connection.md) section, I ran various tests to verify that the IBM PC correctly recognized the serial card.
+In [Part 1](part1-install-serial-card.md), I ran various tests to verify that the IBM PC correctly recognized the serial card.
 
 Next, I tried sending data using the DEBUG program which works at a lower level than GW-BASIC:
 

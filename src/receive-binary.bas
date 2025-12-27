@@ -1,5 +1,5 @@
 ' ============================================================================
-' BINARY-RECEIVE.BAS - Binary File Receiver for IBM PC
+' RECEIVE-BINARY.BAS - Binary File Receiver for IBM PC
 ' ============================================================================
 '
 ' DESCRIPTION:

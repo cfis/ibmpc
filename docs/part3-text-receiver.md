@@ -8,7 +8,7 @@ Next I needed a program that could run on both the IBM PC and the laptop to tran
 * PARCP-USB (requires the special PARCP-USB adapter and a 386+ on the PC side)
 * Fastwire II
 
-The IBM actually did have fastwire installed - so that seemed promising. But when I started it by typing `sl` at command prompt it printed *slave ready..." and there didn't seem to be any way to configure its settings or send files.
+The IBM actually did have Fastwire installed - so that seemed promising. But when I started it by typing `sl` at the command prompt it printed *"slave ready..."* and there didn't seem to be any way to configure its settings or send files.
 
 However, the IBM PC did have [GW-BASIC](https://en.wikipedia.org/wiki/GW-BASIC) installed. And that was good enough - I could write a small program to copy over one of the programs above from my laptop to the IBM PC.
 
@@ -19,14 +19,14 @@ My goal was to copy [kermit.bas](https://www.columbia.edu/kermit/ftp/old/basic/k
 !!! warning "Skip kermit.bas"
     Looking back this was the wrong choice. I should have started with transferring a binary file, `mskermit.exe`. See [Part 6](part6-mskermit.md) for why.
 
-I didn't remember much about basic, except that it had lots of line numbers. To start, you type the command gwbasic which opens this interface:
+I didn't remember much about BASIC, except that it had lots of line numbers. To start, you type the command `GWBASIC` which opens this interface:
 
 ![GW-BASIC](https://upload.wikimedia.org/wikipedia/en/6/6b/GW-BASIC_3.23.png)
 
 !!! note "Exit GW-BASIC"
     To exit GW-BASIC type in `SYSTEM`.
 
-Then start typing in your program (see [receive.bas](https://github.com/cfis/ibmpc/blob/master/src/receive.bas)):
+Then start typing in your program (see [receive-text.bas](https://github.com/cfis/ibmpc/blob/master/src/receive-text.bas)):
 
 ```basic
 10 ON ERROR GOTO 900
@@ -94,7 +94,7 @@ To cancel the program, hit `Ctrl+Break`, not `Ctrl+C`. If you run the program fr
 ### On the Laptop (with PuTTY)
 
 1. Open PuTTY configured for the COM port at 2400 baud
-2. Copy the `kermit.bas` source code and paste it into the putty window by right-clicking
+2. Copy the `kermit.bas` source code and paste it into the PuTTY window by right-clicking
 3. Wait for transfer to complete
 4. Press Ctrl+Break on the PC to stop the program
 
@@ -115,7 +115,7 @@ Error handling notes:
 
 ## Success: KERMIT.BAS Transferred
 
-Using putty and the `receiver.bas` I successfully transferred `kermit.bas` to the IBM PC.
+Using PuTTY and `receive-text.bas` I successfully transferred `kermit.bas` to the IBM PC.
 
 ---
 

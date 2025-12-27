@@ -1,6 +1,6 @@
 # Part 4: Kermit
 
-Having transferred `kermit.bas` from my laptop to the IBM PC I thought I was home free. I could now run `kermit` on the IBM and `C-Kermit` on my laptop (either under Windows 11 or Fedora 43) and start transferring files.
+Having transferred `kermit.bas` from my laptop to the IBM PC, I thought I was home free. I could now run `kermit` on the IBM and `C-Kermit` on my laptop (either under Windows 11 or Fedora 43) and start transferring files.
 
 Kermit, implemented by Columbia University, would enable proper protocol-based transfers with error correction.
 
@@ -20,7 +20,7 @@ The `%%%%%` characters indicate failed packet retries - each `%` represents a NA
 
 ## What Went Wrong
 
-Not wanting to read a bunch of basic code, I asked [ChatGPT](https://chatgpt.com/) to read `kermit.bas` and tell me what was happening. 
+Not wanting to read a bunch of BASIC code, I asked [ChatGPT](https://chatgpt.com/) to read `kermit.bas` and tell me what was happening. 
 
 It came back and told me `kermit.bas` was designed to transfer text files, not binary files. 
 

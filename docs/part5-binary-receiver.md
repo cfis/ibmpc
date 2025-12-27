@@ -1,6 +1,6 @@
 # Part 5: Binary Bootstrap Receiver
 
-Since text transfer did not work, the next choice was to rewrite my `receive.bas` program to support binary transfer. Which of course looking back, I should have just started with a binary transfer program.
+Since text transfer did not work, the next choice was to rewrite my `receive-text.bas` program to support binary transfer. Of course, looking back, I should have just started with a binary transfer program.
 
 ## FOR BINARY Mode
 
@@ -21,7 +21,7 @@ It turns out the version of GW-BASIC installed on the IBM PC is too old to suppo
 
 ## Random Access Mode
 
-Since `FOR BINARY` didn't work, my next approach was to use random access files with `FIELD`, `LSET`, and `PUT`. Here is the final working program ([source](https://github.com/cfis/ibmpc/blob/master/src/binary-receive.bas)):
+Since `FOR BINARY` didn't work, my next approach was to use random access files with `FIELD`, `LSET`, and `PUT`. Here is the final working program ([source](https://github.com/cfis/ibmpc/blob/master/src/receive-binary.bas)):
 
 ```basic
 10 ON ERROR GOTO 900

@@ -1,11 +1,16 @@
 ' ============================================================================
-' RECEIVE.BAS - Simple Serial Text File Receiver for IBM PC
+' RECEIVE-TEXT.BAS - Simple Serial Text File Receiver for IBM PC
 ' ============================================================================
 '
 ' DESCRIPTION:
-'   A minimal GW-BASIC program for receiving text files over a serial
+'   A minimal GW-BASIC program for receiving TEXT files over a serial
 '   connection. Designed for bootstrapping - type this in manually to
 '   establish initial file transfer capability on an IBM PC.
+'
+' WARNING: TEXT FILES ONLY!
+'   This program opens the output file in text mode (FOR OUTPUT), which
+'   corrupts binary files due to CR/LF translation and Ctrl-Z handling.
+'   For binary files (.EXE, .COM, etc.), use RECEIVE-BINARY.BAS instead.
 '
 ' AUTHOR:
 '   Created during IBM PC file recovery project, December 2024
@@ -39,7 +44,7 @@
 '
 ' LIMITATIONS:
 '   - TEXT MODE ONLY: Uses FOR OUTPUT which does CR/LF translation
-'   - Binary files will be corrupted (use BINARY-RECEIVE.BAS instead)
+'   - Binary files will be corrupted (use RECEIVE-BINARY.BAS instead)
 '   - Ctrl-Z (0x1A) in data will be interpreted as EOF
 '   - No progress indication during transfer
 '   - Manual termination required

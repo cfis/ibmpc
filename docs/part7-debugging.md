@@ -106,7 +106,7 @@ On the laptop, I then ran a Ruby script ([source](https://github.com/cfis/ibmpc/
 require 'serialport'
 p = SerialPort.new('COM3', 2400, 8, 1, SerialPort::NONE)
 puts "Listening..."
-data = p.read(3)
+data = p.read(5)
 puts "Received: #{data.inspect}"
 puts "Hex: #{data.bytes.map { |b| '%02x' % b }.join(' ')}"
 p.close
@@ -117,7 +117,7 @@ p.close
 | 1 | `require 'serialport'` | Load the serialport gem |
 | 2 | `SerialPort.new('COM3', 2400, 8, 1, SerialPort::NONE)` | Open COM3 at 2400 baud, 8N1, no flow control |
 | 3 | `puts "Listening..."` | Indicate the script is waiting |
-| 4 | `data = p.read(3)` | Block until 3 bytes are received |
+| 4 | `data = p.read(5)` | Block until 5 bytes are received |
 | 5 | `puts "Received: #{data.inspect}"` | Display received data as Ruby string |
 | 6 | `data.bytes.map { |b| '%02x' % b }` | Convert each byte to 2-digit hex |
 | 7 | `p.close` | Close the serial port |

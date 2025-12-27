@@ -31,7 +31,7 @@ Laptop
 There is a lot of information online about the [RS-232](https://en.wikipedia.org/wiki/RS-232) standard. I found these links to be quite helpful:
 
 * [Tech Stuff - RS-232 Cables, Wiring and Pinouts](https://zytrax.com/tech/layer_1/cables/tech_rs232.htm#loopback)
-* [DB9 to DB25 Pinout and Wiring Explained: How RS232 Connections Worki](https://metabeeai.com/rectangular-connectors-2/d-sub-connectors/db9-to-db25-pinout-and-wiring-explained.html)
+* [DB9 to DB25 Pinout and Wiring Explained: How RS232 Connections Work](https://metabeeai.com/rectangular-connectors-2/d-sub-connectors/db9-to-db25-pinout-and-wiring-explained.html)
 
 The standard defines different pin assignments for DB-25 and DB-9 connectors. Our goal is to cross the TX (transmit) and RX (receive) pins - which is exactly what a null modem cable does:
 

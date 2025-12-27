@@ -1,6 +1,6 @@
 # Part 6: Can't Send Files!
 
-After successfully copying `mskermit` to the IBM PC I thought I was read to start transferring files!
+After successfully copying `mskermit` to the IBM PC I thought I was ready to start transferring files!
 
 First I started `C-Kermit` on my laptop and set it up to receive files:
 

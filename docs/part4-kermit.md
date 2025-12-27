@@ -38,7 +38,7 @@ Third, on line 4040 it uses `PRINT #` which is text-oriented output:
 4040 PRINT #2, MID$(PKTDAT$,1,P);
 ```
 
-Forth, on lines 7250-7270, it handles control-character unquoting but doesn't support 8th-bit quoting for high-bit characters. 
+Fourth, on lines 7250-7270, it handles control-character unquoting but doesn't support 8th-bit quoting for high-bit characters. 
 
 Thus `kermit.bas` was not going to work to transfer a binary program.
 

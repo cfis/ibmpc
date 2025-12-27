@@ -16,13 +16,13 @@ Back in 1981 my parents bought an [IBM PC 5150](https://en.wikipedia.org/wiki/IB
  
 I started programming on this machine, writing a horse handicapping program using [dBase](https://en.wikipedia.org/wiki/DBase). That didn't go anyplace, but it did lead to my eventual career in the software industry.
 
-It was also my mom's working computer through the 1980's. She was a journalist and used it to write a number of articles. In addition, she used it to several unpublished books including *Black Pearl*, *The Bear* and a three part book entitled *Flight of the Cranes.* I have partial print outs of some of them, but not the original digital files.
+It was also my mom's working computer through the 1980's. She was a journalist and used it to write a number of articles. In addition, she used it to write several unpublished books including *Black Pearl*, *The Bear* and a three part book entitled *Flight of the Cranes.* I have partial print outs of some of them, but not the original digital files.
 
 After all these years, she still had the machine - boxed away in the garage. So I recently pulled it out, set it up, and amazingly it booted right up. I forgot how noisy it was! And so primitive - no command history, no command completion, no copy/paste, etc. But at least it had a 10MB hard drive - added a few years later - which makes it a lot easier to use that with a single 5.25 inch floppy drive.
 
 It took me a few minutes to remember how to navigate the machine and refamiliarize myself with the programs of the time (Norton Commander, Fastwire II, etc). After a bit of poking around I found one of the books on the harddrive and couple more on 5 1/4 floppy drives. The books were written using a word processor called [Leading Edge](https://en.wikipedia.org/wiki/Leading_Edge_Products), which was pretty great for the time but eventually got annihilated by [WordStar](https://en.wikipedia.org/wiki/WordStar) and then [WordPerfect](https://en.wikipedia.org/wiki/WordPerfect).
 
-Now that I found what I was looking for, how should I copy the files from the IBM PC to my laptop.  My laptop dual is a Thinkpad that dual boots Windows 11 and Fedora 43. Either operating system will work.
+Now that I found what I was looking for, how should I copy the files from the IBM PC to my laptop.  My laptop is a Thinkpad that dual boots Windows 11 and Fedora 43. Either operating system will work.
 
 ## Data Transfer Options
 Modern computers have almost no overlap with the 1981 IBM PC. The PC predates:
@@ -42,7 +42,7 @@ Thus you can buy a 386 or 486 era machine that has both a 5.25 and 3.5 drive. Yo
 
 Use the parallel port on the IBM PC to transfer data to my laptop. However, laptops and desktops stopped including parallel port around 2005. You can buy USB-to-parallel cables, but they are designed for printers and do not support bidirectional file transfer.
 
-To remedy this, Petr Stehlík has an amazing project, [PARCP-USB](https://joy.sophics.cz/parcp/parcp-usb.html). He builds a special adapter that enables allows bidirectional data transfer using the parallel port with a program called PARCP.
+To remedy this, Petr Stehlík has an amazing project, [PARCP-USB](https://joy.sophics.cz/parcp/parcp-usb.html). He builds a special adapter that enables bidirectional data transfer using the parallel port with a program called PARCP.
 
 I reached out to him and he was very helpful. Unfortunately, he let me know that PARCP-USB requires a 32 bit CPU, and thus a 386 generation or later machine. So this option will not work.
 
@@ -57,7 +57,7 @@ The IBM supports a RS-232 serial port - a standard that is still with us today! 
 
 One downside is serial communications is slow. On old hardware it runs at 1200-9600 bauds. At 4800 baud, a 185 KB file would take a bit over 5 minutes to transfer. But for copying old documents that is fast enough.
 
-To this working requires:
+To get this working requires:
 
 - Installing an 8-bit ISA COM card in the IBM PC
 - A null modem cable (TX/RX crossed)
@@ -93,7 +93,7 @@ So my plan was:
 
 **Working:** Laptop -> PC file transfer at 4800 baud (185 KB in ~7 minutes)
 
-**Blocked:** PC -> laptop transfer fails due to cable wiring issue
+**Blocked:** PC -> laptop transfer fails due to line driver or PSU issue
 
-**Next Steps:** Obtain a proper null modem cable or build one
+**Next Steps:** Check the -12V rail and replace serial card or PSU if needed
 

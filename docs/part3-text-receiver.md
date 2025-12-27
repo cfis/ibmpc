@@ -89,7 +89,7 @@ The `CS0,DS0,CD0` parameters disable hardware flow control signals. I found out 
 2. Type in the program (or `LOAD` if previously saved)
 3. `RUN`
 
-To cancel the program, hit `Ctrl+Break`, not `Ctrl+C`. If you run the program from the command prompt, instead of the GW-BASIC shell, it will appear that your computer is hung after the program completes or you hit `Ctrl+Break`. That caused me to reboot the machine a few times, which is always scary because of the horrendous racket it makes on shutdown. I figured I must be missing something, and in fact I was. As mentioned above, you can type in `SYTSEM` to get back to a command prompt. Oops.
+To cancel the program, hit `Ctrl+Break`, not `Ctrl+C`. If you run the program from the command prompt, instead of the GW-BASIC shell, it will appear that your computer is hung after the program completes or you hit `Ctrl+Break`. That caused me to reboot the machine a few times, which is always scary because of the horrendous racket it makes on shutdown. I figured I must be missing something, and in fact I was. As mentioned above, you can type in `SYSTEM` to get back to a command prompt. Oops.
 
 ### On the Laptop (with PuTTY)
 
@@ -109,7 +109,7 @@ If the receiver prints `ERR=57`, "Device I/O error", or "communication buffer ov
 
 Error handling notes:
 
-- In GW-BASIC, `ERR` is read-only, you cannot not assign to it.
+- In GW-BASIC, `ERR` is read-only, you cannot assign to it.
 - Use `RESUME 40` to return to the wait loop. `RESUME NEXT` continues after a failed `INPUT$` and can trigger "Resume without error".
 - If you see gibberish, double-check that both ends have the same baud rate, parity, and data bits. I made this mistake a couple of times.
 

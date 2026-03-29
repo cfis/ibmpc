@@ -1,5 +1,5 @@
 ' ============================================================================
-' RECEIVE-BINARY.BAS - Binary File Receiver for IBM PC
+' RECEIVE.BAS - Binary File Receiver for IBM PC
 ' ============================================================================
 '
 ' DESCRIPTION:
@@ -16,7 +16,7 @@
 '   bytes, enabling transfer of .EXE, .COM, and other binary files.
 '
 ' COMPANION PROGRAM:
-'   Use with send_binary.rb on the sending computer. The sender must
+'   Use with send.rb on the sending computer. The sender must
 '   pad files to a multiple of 128 bytes.
 '
 ' HARDWARE REQUIREMENTS:
@@ -25,11 +25,11 @@
 '   - Null modem cable connection to sending computer
 '
 ' USAGE:
-'   1. Modify line 30 to specify the output filename
-'   2. Start the Ruby sender: ruby send_binary.rb COM3 FILE.EXE 4800
-'   3. RUN this program on the IBM PC
-'   4. Wait for transfer to complete (sender will show 100%)
-'   5. Press Ctrl+Break on the PC
+'   1. RUN this program on the IBM PC
+'   2. Enter the output filename when prompted (e.g., 3CCFG.EXE)
+'   3. Start the Ruby sender: ruby send_binary.rb /dev/ttyUSB0 FILE.EXE 4800
+'   4. The sender transmits the record count, then the data
+'   5. The receiver exits automatically when all records are received
 '
 ' SERIAL PORT CONFIGURATION:
 '   - COM1 at 4800 baud, 8N1, no flow control
@@ -48,13 +48,20 @@
 '     All PUT operations write this buffer.
 '
 '   LSET STATEMENT:
-'     LSET F$ = B$
+'     LSET F$ = LEFT$(B$,128)
 '     Copies data into the field buffer, left-justified.
-'     Since we read exactly 128 bytes, no padding occurs.
 '
-'   INPUT$ ON COM PORTS:
-'     INPUT$(128, #1) blocks until exactly 128 bytes arrive.
-'     This simplifies the receive loop - no accumulation needed.
+'   ACCUMULATION BUFFER:
+'     Data may arrive from the serial port in chunks smaller than
+'     128 bytes. B$ accumulates incoming data until a full record
+'     is available. Any leftover bytes beyond 128 are carried over
+'     to the next record via MID$(B$,129).
+'
+'   RECORD COUNT PROTOCOL:
+'     The sender transmits the total number of 128-byte records as
+'     a text line (e.g., "1447\r\n") before the binary data. The
+'     receiver reads this with LINE INPUT and uses it to know when
+'     to stop. VAL() converts the string to a number.
 '
 '   WHY 128 BYTES:
 '     - Matches common disk sector sizes
@@ -62,7 +69,7 @@
 '     - Ensures every record is complete
 '
 ' ERROR HANDLING:
-'   ERR=24 : Device timeout (normal at end of transfer)
+'   ERR=24 : Device timeout
 '   ERR=57 : Device I/O error (buffer overrun - try lower baud rate)
 '   ERR=75 : Path/file access error (add RS to COM open string)
 '
@@ -70,17 +77,22 @@
 
 10 ON ERROR GOTO 900
 20 OPEN "COM1:4800,N,8,1,RS,CS0,DS0,CD0" AS #1
-30 OPEN "MSKERMIT.EXE" FOR RANDOM AS #2 LEN=128
+25 INPUT "File";N$
+30 OPEN N$ FOR RANDOM AS #2 LEN=128
 40 FIELD #2, 128 AS F$
-50 RECORD = 1: COUNT = 128
-60 B$ = INPUT$(COUNT, #1)
-70 LSET F$ = B$
-80 PUT #2, RECORD
-90 RECORD = RECORD + 1
-100 GOTO 60
+45 LINE INPUT #1, T$: TOTAL = VAL(T$)
+50 RECORD = 1: B$ = "": NEED = 128
+60 B$ = B$ + INPUT$(NEED, #1)
+70 IF LEN(B$) < 128 THEN 60
+80 LSET F$ = LEFT$(B$,128)
+90 PUT #2, RECORD
+100 B$ = MID$(B$,129)
+105 IF RECORD >= TOTAL THEN 910
+110 RECORD = RECORD + 1
+120 GOTO 60
 900 PRINT "ERR=";ERR;" ERL=";ERL
 910 CLOSE
-920 PRINT "Received"; RECORD-1; "records"
+920 PRINT "Received";RECORD-1;"records"
 930 END
 
 ' ============================================================================
@@ -100,11 +112,13 @@
 '   - RS: Suppress RTS (prevents ERR=75)
 '   - CS0,DS0,CD0: Disable hardware flow control signals
 '
-' Line 30: OPEN "MSKERMIT.EXE" FOR RANDOM AS #2 LEN=128
-'   Opens output file in random access mode:
+' Line 25: INPUT "File";N$
+'   Prompts the user for the output filename (e.g., 3CCFG.EXE).
+'
+' Line 30: OPEN N$ FOR RANDOM AS #2 LEN=128
+'   Opens the output file in random access mode:
 '   - FOR RANDOM: Random access (not text mode!)
 '   - LEN=128: Each record is 128 bytes
-'   - Change filename here for different target file
 '
 ' Line 40: FIELD #2, 128 AS F$
 '   Creates the record buffer:
@@ -112,30 +126,45 @@
 '   - F$ is exactly 128 bytes
 '   - All PUT operations write F$ to disk
 '
-' Line 50: RECORD = 1: COUNT = 128
+' Line 45: LINE INPUT #1, T$: TOTAL = VAL(T$)
+'   Reads the record count from the sender:
+'   - LINE INPUT reads a text line (up to CR) from the serial port
+'   - The sender transmits e.g., "1447\r\n" before the binary data
+'   - VAL() converts the string to a number
+'   - TOTAL is used on line 105 to know when to stop
+'
+' Line 50: RECORD = 1: B$ = "": NEED = 128
 '   Initialize variables:
 '   - RECORD: Current record number (1-based)
-'   - COUNT: Bytes to read per record
+'   - B$: Accumulation buffer for incoming data
+'   - NEED: Bytes to request from serial port
 '
-' Line 60: B$ = INPUT$(COUNT, #1)
-'   Read bytes from serial port:
-'   - INPUT$(count, filenum) blocks until 'count' bytes arrive
-'   - Returns exactly 128 bytes
+' Line 60: B$ = B$ + INPUT$(NEED, #1)
+'   Read bytes from serial port and append to buffer.
+'   Data may arrive in chunks smaller than 128 bytes.
 '
-' Line 70: LSET F$ = B$
-'   Copy to the field buffer:
-'   - LSET copies B$ into F$, the FIELD buffer
-'   - Since B$ is exactly 128 bytes, no padding occurs
+' Line 70: IF LEN(B$) < 128 THEN 60
+'   If we don't have a full record yet, keep reading.
 '
-' Line 80: PUT #2, RECORD
+' Line 80: LSET F$ = LEFT$(B$,128)
+'   Copy first 128 bytes of the buffer into the field buffer.
+'
+' Line 90: PUT #2, RECORD
 '   Write the record to disk:
 '   - Writes F$ (128 bytes) to record number RECORD
 '   - File position = (RECORD-1) * 128
 '
-' Line 90: RECORD = RECORD + 1
+' Line 100: B$ = MID$(B$,129)
+'   Remove the 128 bytes we just wrote, keeping any leftover
+'   bytes for the next record.
+'
+' Line 105: IF RECORD > TOTAL THEN 910
+'   If we've received all expected records, jump to CLOSE/END.
+'
+' Line 110: RECORD = RECORD + 1
 '   Advance to next record number.
 '
-' Line 100: GOTO 60
+' Line 120: GOTO 60
 '   Loop back to read more data.
 '
 ' Line 900: PRINT "ERR=";ERR;" ERL=";ERL
@@ -147,7 +176,6 @@
 '
 ' Line 920: PRINT "Received"; RECORD-1; "records"
 '   Show how many records were written.
-'   - Subtract 1 because RECORD was incremented before error
 '
 ' Line 930: END
 '   Program termination.
@@ -156,9 +184,9 @@
 ' WHY THE SENDER MUST PAD:
 ' ============================================================================
 '
-' INPUT$(128, #1) blocks until exactly 128 bytes arrive. If the file is
-' not a multiple of 128 bytes, the receiver will hang waiting for the
-' final partial block to complete.
+' The receiver writes fixed 128-byte records. If the file is not a
+' multiple of 128 bytes, the last partial block would never complete
+' and the receiver would hang.
 '
 ' Solution: The sender pads the file with null bytes (0x00) to reach
 ' a multiple of 128. This ensures every block is complete.
@@ -173,9 +201,12 @@
 ' VARIABLE REFERENCE:
 ' ============================================================================
 '
+' N$      - Output filename, entered by user at startup (string)
+' T$      - Record count string received from sender (string)
+' TOTAL   - Total number of records to receive (integer)
 ' RECORD  - Current record number being written (integer)
-' COUNT   - Bytes to read per record, always 128 (integer)
-' B$      - Input buffer, holds exactly 128 bytes per iteration (string)
+' NEED    - Bytes to request from serial port, always 128 (integer)
+' B$      - Accumulation buffer, may hold more than 128 bytes (string)
 ' F$      - Field buffer, linked to file #2, always 128 bytes (string)
 '
 ' File Handles:
@@ -187,7 +218,7 @@
 ' ============================================================================
 '
 ' ERROR 24 (Device timeout):
-'   Normal at end of transfer. Press Ctrl+Break, file should be complete.
+'   Check that the sender is running and baud rates match.
 '
 ' ERROR 57 (Device I/O error):
 '   Buffer overrun - data arriving faster than PC can process.
@@ -203,10 +234,5 @@
 ' File corrupted:
 '   Check baud rates match on both sides.
 '   Try lower baud rate (2400 instead of 4800).
-'
-' Program hangs:
-'   INPUT$ blocks until data arrives. Make sure sender is running.
-'   If sender finished but receiver is waiting, the file wasn't
-'   padded to a multiple of 128 bytes.
 '
 ' ============================================================================

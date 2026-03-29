@@ -42,13 +42,17 @@
 require 'serialport'
 
 # Parse command line arguments
-port_name = ARGV[0] || 'COM3'
+default_port = case RUBY_PLATFORM
+               when /mswin|mingw/ then 'COM3'
+               else '/dev/ttyUSB0'
+               end
+port_name = ARGV[0] || default_port
 file_path = ARGV[1]
 baud_rate = (ARGV[2] || 4800).to_i
 
 # Validate arguments
-if file_path.nil? || !File.exist?(file_path)
-  puts "Usage: ruby send_binary.rb PORT FILENAME [BAUD]"
+if file_path.nil?
+  puts "Usage: ruby send.rb PORT FILENAME [BAUD]"
   puts ""
   puts "Arguments:"
   puts "  PORT     - Serial port (e.g., COM3 or /dev/ttyUSB0)"
@@ -56,7 +60,10 @@ if file_path.nil? || !File.exist?(file_path)
   puts "  BAUD     - Baud rate (default: 4800)"
   puts ""
   puts "Example:"
-  puts "  ruby send_binary.rb COM3 MSKERMIT.EXE 4800"
+  puts "  ruby send.rb COM3 MSKERMIT.EXE 4800"
+  exit 1
+elsif !File.exist?(file_path)
+  puts "ERROR: File not found: #{file_path}"
   exit 1
 end
 
@@ -99,12 +106,16 @@ rescue => e
   exit 1
 end
 
+# Send record count so receiver knows when to stop
+sp.write("#{record_count}\r")
+
 # Send data with progress display
 puts "Sending..."
 puts ""
 
 last_pct = -5
 bytes_sent = 0
+start_time = Time.now
 
 data.bytes.each_slice(128) do |chunk|
   # Send one 128-byte record
@@ -116,7 +127,9 @@ data.bytes.each_slice(128) do |chunk|
 
   # Show progress every 5%
   if pct % 5 == 0 && pct > last_pct
-    puts "#{pct}%"
+    bytes_left = data.size - bytes_sent
+    remaining = bytes_left.to_f / (baud_rate / 10) / 60.0
+    puts "#{pct}% (#{remaining.round(1)} min remaining)"
     last_pct = pct
   end
 end
@@ -128,7 +141,10 @@ sp.close
 puts ""
 puts "=" * 60
 puts "Done! Sent #{data.size} bytes (#{record_count} records)"
-puts "Press Ctrl+Break on the PC to stop the BASIC program"
+elapsed = (Time.now - start_time) / 60.0
+puts "Transfer time: #{elapsed.round(1)} minutes"
+puts ""
+puts "On the PC: RUN for another transfer, SYSTEM to return to DOS."
 puts "=" * 60
 
 # ============================================================================

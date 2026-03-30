@@ -88,6 +88,8 @@ So my plan was:
 | 6 | [Can't Send Files!](part6-mskermit.md) | Discovering the one-way communication issue |
 | 7 | [Debugging](part7-debugging.md) | Diagnosing the line driver failure with loopback tests |
 | 8 | [Next Steps](part8-next-steps.md) | Checking the -12V rail and fixing the PSU |
+| 9 | [TCP/IP](part9-tcp-ip.md) | Transferring NIC and mTCP files via serial |
+| 10 | [3COM NIC](part10-3com-nic.md) | Installing and configuring the 3COM 3C509B |
 
 ## Current Status
 
@@ -95,6 +97,6 @@ So my plan was:
 
 **Blocked:** PC -> laptop transfer fails due to line driver or PSU issue
 
-**Next Steps:** Check the -12V rail and replace serial card or PSU if needed
+**New Approach:** Switching to TCP/IP networking with a 3COM NIC and mTCP
 
 

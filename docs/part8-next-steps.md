@@ -25,3 +25,7 @@ Once I buy a multimeter, I will need to pull out the serial card to have access 
 If the -12V rail measures correctly, then the MC1488 chip on the serial card is likely broken and I should try another card. Note it is possible the ISA slot has an issue, but I don't have any other unused slots.
 
 If the -12V rail fails, then I'll be watching some YouTube videos to figure out how to fix it.
+
+---
+
+**Next:** [Part 9: TCP/IP](part9-tcp-ip.md)

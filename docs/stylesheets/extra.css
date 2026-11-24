@@ -1,0 +1,10 @@
+/* Zensical's dark scheme is near black; use the lighter slate from Material for MkDocs. */
+[data-md-color-scheme="slate"] {
+  --md-default-bg-color: hsla(var(--md-hue), 15%, 14%, 1);
+  --md-default-bg-color--light: hsla(var(--md-hue), 15%, 14%, 0.54);
+  --md-default-bg-color--lighter: hsla(var(--md-hue), 15%, 14%, 0.26);
+  --md-default-bg-color--lightest: hsla(var(--md-hue), 15%, 14%, 0.07);
+  --md-code-bg-color: hsla(var(--md-hue), 15%, 18%, 1);
+  --md-code-bg-color--light: hsla(var(--md-hue), 15%, 18%, 0.9);
+  --md-code-bg-color--lighter: hsla(var(--md-hue), 15%, 18%, 0.54);
+}

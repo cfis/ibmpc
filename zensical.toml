@@ -6,6 +6,7 @@ site_author = "cfis"
 repo_url = "https://github.com/cfis/ibmpc"
 repo_name = "cfis/ibmpc"
 not_in_nav = "/3c5x9cfg-plan.md"
+extra_css = ["stylesheets/extra.css"]
 
 nav = [
   { "Home" = "index.md" },
@@ -29,10 +30,21 @@ features = [
   "toc.integrate",
 ]
 
-[project.theme.palette]
+# Palette toggle for dark mode (the default)
+[[project.theme.palette]]
 scheme = "slate"
 primary = "blue-grey"
 accent = "amber"
+toggle.icon = "lucide/moon"
+toggle.name = "Switch to light mode"
+
+# Palette toggle for light mode
+[[project.theme.palette]]
+scheme = "default"
+primary = "blue-grey"
+accent = "amber"
+toggle.icon = "lucide/sun"
+toggle.name = "Switch to dark mode"
 
 [[project.extra.social]]
 icon = "fontawesome/brands/github"

@@ -8,3 +8,9 @@
   --md-code-bg-color--light: hsla(var(--md-hue), 15%, 18%, 0.9);
   --md-code-bg-color--lighter: hsla(var(--md-hue), 15%, 18%, 0.54);
 }
+
+/* Amber is unreadable on white; use a darker orange in light mode. */
+[data-md-color-scheme="default"] {
+  --md-accent-fg-color: #c2410c;
+  --md-accent-fg-color--transparent: rgba(249, 115, 22, 0.15);
+}

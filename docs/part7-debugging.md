@@ -129,7 +129,7 @@ As expected, the Ruby script blocked indefinitely waiting for data that never ar
 Next, I unplugged the null modem cable from the USB serial adapter. I created a "loopback" by shorting pins 2 and 3 on the female DB-9 mating plate. This would verify the USB adapter was working properly by having it echo back anything sent to it.
 
 !!! warning "Pin Placement"
-    On a female mating plate, pin #1 is on the top right! For more information refer to the [RS-232](part2-serial-connection.md#rs-232-) section.
+    On a female mating plate, pin #1 is on the top right! For more information refer to the [RS-232](part2-serial-connection.md#rs-232) section.
 
 I typed some characters on the laptop and they echoed back correctly. So the USB serial adapter was working fine - the problem was on the IBM PC side.
 

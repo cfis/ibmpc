@@ -31,3 +31,7 @@ heap.dump
 # Ruby version managers
 .ruby-version
 .rvmrc
+
+# Zensical output
+site/
+.cache/

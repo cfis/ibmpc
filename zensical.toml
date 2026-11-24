@@ -1,0 +1,48 @@
+[project]
+site_name = "IBM PC File Recovery Project"
+site_url = "https://cfis.github.io/ibmpc/"
+site_description = "A journey to transfer files from a 1981 IBM PC to a modern laptop"
+site_author = "cfis"
+repo_url = "https://github.com/cfis/ibmpc"
+repo_name = "cfis/ibmpc"
+not_in_nav = "/3c5x9cfg-plan.md"
+
+nav = [
+  { "Home" = "index.md" },
+  { "Part 1 - Install Serial Card" = "part1-install-serial-card.md" },
+  { "Part 2 - Serial Connection" = "part2-serial-connection.md" },
+  { "Part 3 - Bootstrap Text Receiver" = "part3-text-receiver.md" },
+  { "Part 4 - Kermit" = "part4-kermit.md" },
+  { "Part 5 - Bootstrap Binary Receiver" = "part5-binary-receiver.md" },
+  { "Part 6 - Can't Send Files!" = "part6-mskermit.md" },
+  { "Part 7 - Debugging" = "part7-debugging.md" },
+  { "Part 8 - Next Steps" = "part8-next-steps.md" },
+  { "Part 9 - Switching to TCP/IP" = "part9-tcp-ip.md" },
+  { "Part 10 - Install 3COM NIC" = "part10-3com-nic.md" },
+  { "Resources" = "resources.md" },
+]
+
+[project.theme]
+features = [
+  "navigation.sections",
+  "navigation.expand",
+  "toc.integrate",
+]
+
+[project.theme.palette]
+scheme = "slate"
+primary = "blue-grey"
+accent = "amber"
+
+[[project.extra.social]]
+icon = "fontawesome/brands/github"
+link = "https://github.com/cfis/ibmpc"
+
+[project.markdown_extensions]
+pymdownx.highlight.anchor_linenums = true
+pymdownx.superfences = {}
+pymdownx.inlinehilite = {}
+admonition = {}
+pymdownx.details = {}
+tables = {}
+toc.permalink = true
